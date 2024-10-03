@@ -1,0 +1,96 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #f9fafb;
+  --foreground: #111827;
+}
+
+@layer utilities {
+  .bg-background {
+    background-color: var(--background);
+  }
+  .text-foreground {
+    color: var(--foreground);
+  }
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: 'sans-serif'; /* or 'font-sans' if you have a Tailwind custom font loaded */
+}
+
+.container {
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  color: black;
+}
+
+.btn {
+  display: inline-block;
+  border-radius: 9999px;
+  font-weight: 600;
+  text-align: center;
+  box-shadow: 0px 4px 6px -1px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+.btn-primary {
+  background: linear-gradient(to right, var(--primary), var(--accent));
+  color: black;
+  padding: 1rem 2rem;
+  font-size: 1.25rem;
+}
+
+.btn-secondary {
+  border: 2px solid white;
+  color: black;
+  padding: 1rem 2rem;
+  font-size: 1.25rem;
+  transition: color 0.3s ease-in-out, background 0.3s ease-in-out;
+}
+
+.btn-secondary:hover {
+  background-color: white;
+  color: var(--secondary);
+}
+
+.card {
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0px 4px 6px -1px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+body::before {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 800 800' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.05;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.8s ease-out;
+}
+
+.animate-slideIn {
+  animation: slideInFromBottom 0.6s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInFromBottom {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}

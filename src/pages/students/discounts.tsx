@@ -1,5 +1,4 @@
 import React from 'react';
-import Layout from '../../app/components/Layout';
 import DiscountCard from '../../app/components/DiscountCard';
 
 const DiscountsPage: React.FC = () => {
@@ -9,22 +8,20 @@ const DiscountsPage: React.FC = () => {
     ];
 
     return (
-        <Layout>
-            <div className="container mx-auto px-4 py-8">
-                <h1 className="text-3xl font-bold mb-4">Available Discounts</h1>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    {discounts.map((discount) => (
-                        <DiscountCard
-                            key={discount.id}
-                            title={discount.title}
-                            description={discount.description}
-                            institution={discount.institution}
-                            onApply={() => console.log(`Applied for discount: ${discount.id}`)}
-                        />
-                    ))}
-                </div>
+        <div className="container mx-auto px-4 py-8">
+            <h1 className="text-3xl font-bold mb-4">Available Discounts</h1>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {discounts.map((discount) => (
+                    <DiscountCard
+                        key={discount.id}
+                        title={discount.title}
+                        description={discount.description}
+                        institution={discount.institution}
+                        onApply={() => console.log(`Applied for discount: ${discount.id}`)}
+                    />
+                ))}
             </div>
-        </Layout>
+        </div>
     );
 };
 
