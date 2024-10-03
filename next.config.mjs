@@ -1,4 +1,10 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
-
-export default nextConfig;
+const nextConfig = {
+    output: 'standalone',
+    reactStrictMode: false,
+    experimental: {
+      serverComponentsExternalPackages: ['lucide'],
+    },
+  };
+  
+  export default nextConfig;
