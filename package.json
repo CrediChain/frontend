@@ -1,15 +1,12 @@
 {
   "name": "frontend",
   "version": "0.1.0",
-  "homepage": "https://credichain.github.io/frontend/",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d .next"
+    "lint": "next lint"
   },
   "dependencies": {
     "lucide-react": "^0.447.0",
