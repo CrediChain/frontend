@@ -39,9 +39,15 @@ The idea for CrediChain was inspired by SheerID, a platform that focuses on iden
 ## Getting Started
 To get started with the CrediChain frontend, follow these steps:
 
-1. Navigate to CrediChain's URL: `{URL Goes Here}`
-2. Sign in or sign up via CrediChain's platform.
-3. As an institution, create credentials and discounts. As a student, apply and select discounts that suit your needs.
+1. Navigate to CrediChain's website: https://credichain.github.io/frontend/
+
+2. Click on the "For Institutions" or "For Students" tab to access the relevant section.
+
+3. Select your role (institution or student).
+
+4. Log in or sign up via CrediChain's platform.
+
+5. As an institution, create credentials and discounts. As a student, apply and select discounts that suit your needs.
 
 ## Contributing
 We welcome contributions! Please follow these steps to contribute:
