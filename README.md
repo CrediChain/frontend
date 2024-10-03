@@ -1,36 +1,56 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# CrediChain Frontend
+
+## Table of Contents
+- [CrediChain Frontend](#credichain-frontend)
+  - [Table of Contents](#table-of-contents)
+  - [Introduction](#introduction)
+  - [Problem Statement](#problem-statement)
+    - [Educational Credentials and Certification](#educational-credentials-and-certification)
+  - [Inspiration](#inspiration)
+  - [Features](#features)
+  - [Tech Stack](#tech-stack)
+  - [Getting Started](#getting-started)
+  - [Contributing](#contributing)
+  - [License](#license)
+
+## Introduction
+CrediChain is an innovative platform designed to provide a secure, transparent, and efficient solution for verifying educational credentials and certifications. Our frontend application caters to both educational institutions and students, aiming to streamline the verification process and enhance trust in academic achievements.
+
+## Problem Statement
+### Educational Credentials and Certification
+1. **Credential Fraud**: The prevalence of fake degrees and certificates undermines the credibility of educational institutions, creating significant challenges for employers and students alike.
+2. **Verification Delays**: Employers and educational institutions often face significant delays in verifying the authenticity of educational credentials, leading to inefficiencies in hiring and admissions processes.
+
+## Inspiration
+The idea for CrediChain was inspired by SheerID, a platform that focuses on identity verification to provide solutions across various industries. By leveraging blockchain technology, CrediChain aims to establish a similar trust mechanism specifically for educational credentials. Learn more about SheerID [here](https://www.sheerid.com/).
+
+## Features
+- **Secure Credential Verification**: Utilize blockchain technology to ensure the integrity and authenticity of degrees and certificates.
+- **Real-Time Verification**: Enable instant verification of credentials, significantly reducing the time and effort involved in traditional verification processes.
+- **User-Friendly Interface**: A clean and intuitive design that enhances the user experience for both institutions and students.
+- **Accessibility**: The platform is accessible to a wide range of users, ensuring that all stakeholders can benefit from its features.
+- **Integration with Educational Institutions**: Collaborate with universities and colleges to allow seamless credential issuance and verification.
+
+## Tech Stack
+- **Frontend**: React.js, Next.js, Tailwind CSS
+- **Blockchain**: Ethereum (or your selected blockchain)
+- **Other Tools**: Redux for state management, Axios for API requests
 
 ## Getting Started
+To get started with the CrediChain frontend, follow these steps:
 
-First, run the development server:
+1. Navigate to CrediChain's URL: `{URL Goes Here}`
+2. Sign in or sign up via CrediChain's platform.
+3. As an institution, create credentials and discounts. As a student, apply and select discounts that suit your needs.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Contributing
+We welcome contributions! Please follow these steps to contribute:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature-branch`).
+3. Make your changes and commit them (`git commit -m 'Add new feature'`).
+4. Push to the branch (`git push origin feature-branch`).
+5. Open a Pull Request.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## License
+This project is licensed under the MIT License. See the LICENSE file for more information.
