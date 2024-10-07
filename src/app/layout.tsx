@@ -1,14 +1,10 @@
 import type { Metadata } from "next";
-import { headers } from 'next/headers';
-import { type ReactNode } from 'react';
-import { cookieToInitialState } from 'wagmi';
 import localFont from "next/font/local";
 import '@coinbase/onchainkit/styles.css';
 import "./globals.css";
 
-import { getConfig } from '../config';
-import { Providers } from '../providers';
 import Layout from "./components/Layout";
+import { DynamicProviders } from "./components/DynamicProviders";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -30,19 +26,14 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: {
-  children: ReactNode;
+  children: React.ReactNode;
 }) {
-  const initialState = cookieToInitialState(
-    getConfig(),
-    headers().get('cookie')
-  );
-
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} font-sans bg-background text-foreground`}>
-        <Providers initialState={initialState}>
+        <DynamicProviders>
           <Layout>{children}</Layout>
-        </Providers>
+        </DynamicProviders>
       </body>
     </html>
   );

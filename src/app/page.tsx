@@ -3,9 +3,6 @@
 import React from 'react';
 import Link from 'next/link';
 import { ArrowRight, CheckCircle } from 'lucide-react';
-import { base } from 'viem/chains';
-import { OnchainKitProvider } from '@coinbase/onchainkit';
-import { ConnectWallet } from '@coinbase/onchainkit/wallet';
 
 const Home = () => {
   return (
@@ -84,13 +81,10 @@ const Home = () => {
             <button className="btn btn-primary animate-slideIn inline-flex items-center px-8 py-4 text-xl">
               Sign Up Now <ArrowRight className="ml-4 w-6 h-6" />
             </button>
-            <OnchainKitProvider apiKey={process.env.NEXT_PUBLIC_ONCHAINKIT_API_KEY} chain={base}>
-              <ConnectWallet />
-            </OnchainKitProvider>
           </Link>
         </div>
-      </section >
-    </div >
+      </section>
+    </div>
   );
 };
 

@@ -1,10 +1,12 @@
+'use client';
+
 import { OnchainKitProvider } from '@coinbase/onchainkit';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { base } from 'wagmi/chains';
 import { type ReactNode, useState } from 'react';
 import { type State, WagmiProvider } from 'wagmi';
 
-import { getConfig } from '@/config';
+import { getConfig } from './config';
 
 export function Providers(props: {
     children: ReactNode;
