@@ -13,6 +13,12 @@ export function DynamicProviders({ children }: { children: React.ReactNode }) {
         const config = getConfig();
         const state = cookieToInitialState(config, cookie);
         setInitialState(state);
+
+        // Remove the cz-shortcut-listen attribute
+        const body = document.body;
+        if (body && body.getAttribute('cz-shortcut-listen')) {
+            body.removeAttribute('cz-shortcut-listen');
+        }
     }, []);
 
     // Render children even if initialState is null

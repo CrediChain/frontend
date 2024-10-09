@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { ArrowRight, CheckCircle, Zap, Shield, Gift } from 'lucide-react';
+import { ArrowRight, Zap, Shield, Gift } from 'lucide-react';
 
 const Home = () => {
   return (
@@ -17,12 +17,12 @@ const Home = () => {
             Secure, blockchain-based credential verification for students and institutions.
           </p>
           <div className="flex justify-center space-x-4 mt-8">
-            <Link href="/students">
+            <Link href="/student/dashboard">
               <button className="btn btn-primary animate-slideIn">
                 I'm a Student
               </button>
             </Link>
-            <Link href="/institutions">
+            <Link href="/institution/dashboard">
               <button className="btn btn-secondary animate-slideIn">
                 I'm an Institution
               </button>
@@ -80,11 +80,11 @@ const Home = () => {
           <p className="text-2xl mb-12 animate-fadeIn">
             Join CrediChain today and start verifying credentials or claiming discounts.
           </p>
-          <Link href="/signup">
-            <button className="btn btn-primary animate-slideIn inline-flex items-center">
-              Sign Up Now <ArrowRight className="ml-4 w-6 h-6" />
-            </button>
-          </Link>
+          <button
+            className="btn btn-primary animate-slideIn inline-flex items-center"
+          >
+            Sign Up Now <ArrowRight className="ml-4 w-6 h-6" />
+          </button>
         </div>
       </section>
     </div>
