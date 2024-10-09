@@ -1,13 +1,17 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import '@coinbase/onchainkit/styles.css';
 import "./globals.css";
+
 import Layout from "./components/Layout";
+import { DynamicProviders } from "./components/DynamicProviders";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
   weight: "100 900",
 });
+
 const geistMono = localFont({
   src: "./fonts/GeistMonoVF.woff",
   variable: "--font-geist-mono",
@@ -21,13 +25,15 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <Layout>{children}</Layout>
+      <body className={`${geistSans.variable} ${geistMono.variable} font-sans bg-background text-foreground`}>
+        <DynamicProviders>
+          <Layout>{children}</Layout>
+        </DynamicProviders>
       </body>
     </html>
   );

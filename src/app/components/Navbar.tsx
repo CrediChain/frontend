@@ -1,5 +1,10 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
+import { OnchainKitProvider } from '@coinbase/onchainkit';
+import { ConnectWallet } from '@coinbase/onchainkit/wallet';
+import { base } from 'viem/chains';
 
 const Navbar: React.FC = () => {
     return (
@@ -18,8 +23,10 @@ const Navbar: React.FC = () => {
                         </div>
                     </div>
                     <div className="hidden md:flex items-center space-x-3">
-                        <Link href="/login" className="py-2 px-2 font-medium text-gray-500 rounded hover:bg-green-500 hover:text-white transition duration-300">Log In</Link>
-                        <Link href="/signup" className="py-2 px-2 font-medium text-white bg-green-500 rounded hover:bg-green-400 transition duration-300">Sign Up</Link>
+                        {/* Replace Log In / Sign Up buttons with ConnectWallet */}
+                        <OnchainKitProvider apiKey={process.env.NEXT_PUBLIC_ONCHAINKIT_API_KEY} chain={base}>
+                            <ConnectWallet />
+                        </OnchainKitProvider>
                     </div>
                 </div>
             </div>
