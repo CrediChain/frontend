@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
 import { ArrowRight, Zap, Shield, Gift } from 'lucide-react';
 import { useAccount } from 'wagmi';
 import WorldIdAuth from '../app/components/WorldIdAuth';
