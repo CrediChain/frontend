@@ -1,15 +1,13 @@
 import { http, cookieStorage, createConfig, createStorage } from 'wagmi';
-import { base } from 'wagmi/chains'; 
+import { base, baseSepolia, sepolia, optimismSepolia } from 'wagmi/chains'; 
 import { coinbaseWallet } from 'wagmi/connectors';
  
 export function getConfig() {
   return createConfig({
-    chains: [base], 
+    chains: [baseSepolia, base, sepolia, optimismSepolia], 
     connectors: [
       coinbaseWallet({
         appName: "OnchainKit",
-        preference: 'smartWalletOnly',
-        version: '4',
       }),
     ],
     storage: createStorage({
@@ -17,7 +15,10 @@ export function getConfig() {
     }),
     ssr: true,
     transports: {
-      [base.id]: http(), 
+      [base.id]: http(),
+      [baseSepolia.id]: http(),
+      [sepolia.id]: http(),
+      [optimismSepolia.id]: http(),
     },
   });
 }

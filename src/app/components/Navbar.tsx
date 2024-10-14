@@ -3,7 +3,19 @@
 import React from 'react';
 import Link from 'next/link';
 import { OnchainKitProvider } from '@coinbase/onchainkit';
-import { ConnectWallet } from '@coinbase/onchainkit/wallet';
+import {
+    ConnectWallet,
+    Wallet,
+    WalletDropdown,
+    WalletDropdownDisconnect,
+} from '@coinbase/onchainkit/wallet';
+import {
+    Address,
+    Avatar,
+    Name,
+    Identity,
+} from '@coinbase/onchainkit/identity';
+import { color } from '@coinbase/onchainkit/theme';
 import { base } from 'viem/chains';
 
 const Navbar: React.FC = () => {
@@ -25,7 +37,20 @@ const Navbar: React.FC = () => {
                     <div className="hidden md:flex items-center space-x-3">
                         {/* Replace Log In / Sign Up buttons with ConnectWallet */}
                         <OnchainKitProvider apiKey={process.env.NEXT_PUBLIC_ONCHAINKIT_API_KEY} chain={base}>
-                            <ConnectWallet />
+                            <Wallet>
+                                <ConnectWallet>
+                                    <Avatar className="h-6 w-6" />
+                                    <Name />
+                                </ConnectWallet>
+                                <WalletDropdown>
+                                    <Identity className="px-4 pt-3 pb-2" hasCopyAddressOnClick>
+                                        <Avatar />
+                                        <Name />
+                                        <Address className={color.foregroundMuted} />
+                                    </Identity>
+                                    <WalletDropdownDisconnect />
+                                </WalletDropdown>
+                            </Wallet>
                         </OnchainKitProvider>
                     </div>
                 </div>
