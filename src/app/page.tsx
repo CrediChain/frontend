@@ -7,29 +7,36 @@ import { useAccount } from 'wagmi';
 import WorldIdAuth from '../app/components/WorldIdAuth';
 
 const Home = () => {
-  const { address, isConnected } = useAccount(); // Update this to use Coinbase OnchainKit if needed
+  const { address, isConnected } = useAccount();
   const [isVerified, setIsVerified] = useState(false);
-  const [showVerification, setShowVerification] = useState(false);
+  const [triggerVerification, setTriggerVerification] = useState(false);
+  const [userType, setUserType] = useState<string | null>(null);
+
 
   const handleVerificationSuccess = () => {
     setIsVerified(true);
+    if (userType === 'student') {
+      window.location.href = '/student';
+    } else if (userType === 'institution') {
+      window.location.href = '/institution';
+    }
   };
 
-  const handleConnectAndVerify = () => {
+  const handleConnectAndVerify = (type: string) => {
     if (!isConnected) {
       // Trigger Coinbase OnchainKit connection
       alert('Please connect your wallet first.');
       return;
     }
-    setShowVerification(true);
+    setUserType(type); // Store the clicked user type
+    setTriggerVerification(true); // Trigger World ID verification
   };
 
   useEffect(() => {
-    if (isConnected && showVerification) {
-      // This ensures that after the connection, the World ID verification opens.
-      setShowVerification(true);
+    if (isConnected && triggerVerification) {
+      setTriggerVerification(true);
     }
-  }, [isConnected, showVerification]);
+  }, [isConnected, triggerVerification]);
 
   return (
     <div className="bg-background min-h-screen">
@@ -45,13 +52,13 @@ const Home = () => {
           <div className="flex justify-center space-x-4 mt-8">
             <button
               className="btn btn-primary animate-slideIn"
-              onClick={handleConnectAndVerify}
+              onClick={() => handleConnectAndVerify('student')}
             >
               I'm a Student
             </button>
             <button
               className="btn btn-secondary animate-slideIn"
-              onClick={handleConnectAndVerify}
+              onClick={() => handleConnectAndVerify('institution')}
             >
               I'm an Institution
             </button>
@@ -60,16 +67,8 @@ const Home = () => {
       </section>
 
       {/* World ID Authentication Widget */}
-      {showVerification && (
-        <WorldIdAuth onSuccess={handleVerificationSuccess} />
-      )}
-
-      {/* Optionally, redirect user after successful verification */}
-      {isVerified && (
-        <div className="text-center mt-6">
-          <p className="text-green-500">Verification successful!</p>
-          <Link href="/dashboard">Go to your dashboard</Link>
-        </div>
+      {triggerVerification && (
+        <WorldIdAuth onSuccess={handleVerificationSuccess} triggerVerification={triggerVerification} />
       )}
 
       {/* How It Works Section */}

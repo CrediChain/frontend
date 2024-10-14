@@ -1,19 +1,26 @@
 'use client'
 
-import React from 'react';
+import React, { useRef } from 'react';
 import { IDKitWidget, VerificationLevel, ISuccessResult } from '@worldcoin/idkit';
-import { useAccount, useWriteContract } from 'wagmi';
+import { useWriteContract } from 'wagmi';
 import { decodeAbiParameters } from 'viem';
 import { identityManagerABI } from '../abi/identityManagerABI';
 
 interface WorldIdAuthProps {
     onSuccess: () => void;
+    triggerVerification: boolean;
 }
 
-const WorldIdAuth: React.FC<WorldIdAuthProps> = ({ onSuccess }) => {
+const WorldIdAuth: React.FC<WorldIdAuthProps> = ({ onSuccess, triggerVerification }) => {
     const contractAddress = '0xd68ca0714a711022B877C0c49C5baf1E5297cC79'; //Base Sepolia
-
     const { writeContract, isError, error } = useWriteContract();
+    const widgetRef = useRef<any>(null);
+
+    React.useEffect(() => {
+        if (triggerVerification && widgetRef.current) {
+            widgetRef.current();
+        }
+    }, [triggerVerification]);
 
     const handleVerify = async (result: ISuccessResult) => {
         const { merkle_root, nullifier_hash, proof } = result;
@@ -43,21 +50,17 @@ const WorldIdAuth: React.FC<WorldIdAuthProps> = ({ onSuccess }) => {
 
     return (
         <IDKitWidget
-            app_id="app_staging_9e74e697f8ab2acdd8192776b90c6902" // Replace with your on-chain app ID
-            action="verify-entity" // Replace with your action ID
+            app_id="app_staging_9e74e697f8ab2acdd8192776b90c6902"
+            action="verify-entity"
             signal="optional_signal"
             onSuccess={onSuccess}
             handleVerify={handleVerify}
             verification_level={VerificationLevel.Orb}
         >
-            {({ open }) => (
-                <button
-                    onClick={open}
-                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                >
-                    Verify with World ID
-                </button>
-            )}
+            {({ open }) => {
+                widgetRef.current = open; // Store the open function in the ref
+                return <React.Fragment />; // or return <></>
+            }}
         </IDKitWidget>
     );
 };
