@@ -1,10 +1,36 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { ArrowRight, Zap, Shield, Gift } from 'lucide-react';
+import { useAccount } from 'wagmi';
+import WorldIdAuth from '../app/components/WorldIdAuth';
 
 const Home = () => {
+  const { address, isConnected } = useAccount(); // Update this to use Coinbase OnchainKit if needed
+  const [isVerified, setIsVerified] = useState(false);
+  const [showVerification, setShowVerification] = useState(false);
+
+  const handleVerificationSuccess = () => {
+    setIsVerified(true);
+  };
+
+  const handleConnectAndVerify = () => {
+    if (!isConnected) {
+      // Trigger Coinbase OnchainKit connection
+      alert('Please connect your wallet first.');
+      return;
+    }
+    setShowVerification(true);
+  };
+
+  useEffect(() => {
+    if (isConnected && showVerification) {
+      // This ensures that after the connection, the World ID verification opens.
+      setShowVerification(true);
+    }
+  }, [isConnected, showVerification]);
+
   return (
     <div className="bg-background min-h-screen">
       {/* Hero Section */}
@@ -17,19 +43,34 @@ const Home = () => {
             Secure, blockchain-based credential verification for students and institutions.
           </p>
           <div className="flex justify-center space-x-4 mt-8">
-            <Link href="/student/dashboard">
-              <button className="btn btn-primary animate-slideIn">
-                I'm a Student
-              </button>
-            </Link>
-            <Link href="/institution/dashboard">
-              <button className="btn btn-secondary animate-slideIn">
-                I'm an Institution
-              </button>
-            </Link>
+            <button
+              className="btn btn-primary animate-slideIn"
+              onClick={handleConnectAndVerify}
+            >
+              I'm a Student
+            </button>
+            <button
+              className="btn btn-secondary animate-slideIn"
+              onClick={handleConnectAndVerify}
+            >
+              I'm an Institution
+            </button>
           </div>
         </div>
       </section>
+
+      {/* World ID Authentication Widget */}
+      {showVerification && (
+        <WorldIdAuth onSuccess={handleVerificationSuccess} />
+      )}
+
+      {/* Optionally, redirect user after successful verification */}
+      {isVerified && (
+        <div className="text-center mt-6">
+          <p className="text-green-500">Verification successful!</p>
+          <Link href="/dashboard">Go to your dashboard</Link>
+        </div>
+      )}
 
       {/* How It Works Section */}
       <section className="how-it-works-section">
