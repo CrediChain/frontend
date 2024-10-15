@@ -3,14 +3,10 @@
 import React from "react";
 import Link from "next/link";
 import { OnchainKitProvider } from "@coinbase/onchainkit";
-import { base } from "viem/chains";
 import {
   ConnectWallet,
   Wallet,
   WalletDropdown,
-  WalletDropdownBasename,
-  WalletDropdownFundLink,
-  WalletDropdownLink,
   WalletDropdownDisconnect,
 } from "@coinbase/onchainkit/wallet";
 import {
@@ -20,6 +16,8 @@ import {
   Identity,
   EthBalance,
 } from "@coinbase/onchainkit/identity";
+import { color } from "@coinbase/onchainkit/theme";
+import { base } from "viem/chains";
 
 const Navbar: React.FC = () => {
   return (
@@ -64,17 +62,9 @@ const Navbar: React.FC = () => {
                   <Identity className="px-4 pt-3 pb-2" hasCopyAddressOnClick>
                     <Avatar />
                     <Name />
-                    <Address />
+                    <Address className={color.foregroundMuted} />
                     <EthBalance />
                   </Identity>
-                  <WalletDropdownBasename />
-                  <WalletDropdownLink
-                    icon="wallet"
-                    href="https://keys.coinbase.com"
-                  >
-                    Wallet
-                  </WalletDropdownLink>
-                  <WalletDropdownFundLink />
                   <WalletDropdownDisconnect />
                 </WalletDropdown>
               </Wallet>

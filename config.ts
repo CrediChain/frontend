@@ -1,27 +1,31 @@
 import { http, cookieStorage, createConfig, createStorage } from "wagmi";
-import { base } from "wagmi/chains";
+import { base, baseSepolia, sepolia, optimismSepolia } from "wagmi/chains";
 import { coinbaseWallet } from "wagmi/connectors";
 
-export const config = createConfig({
-  chains: [base],
-  connectors: [
-    coinbaseWallet({
-      appName: "OnchainKit",
-      preference: "all",
-      version: "4",
+export function getConfig() {
+  return createConfig({
+    chains: [baseSepolia, base, sepolia, optimismSepolia],
+    connectors: [
+      coinbaseWallet({
+        appName: "OnchainKit",
+        preference: "all",
+      }),
+    ],
+    storage: createStorage({
+      storage: cookieStorage,
     }),
-  ],
-  storage: createStorage({
-    storage: cookieStorage,
-  }),
-  ssr: true,
-  transports: {
-    [base.id]: http(),
-  },
-});
+    ssr: true,
+    transports: {
+      [base.id]: http(),
+      [baseSepolia.id]: http(),
+      [sepolia.id]: http(),
+      [optimismSepolia.id]: http(),
+    },
+  });
+}
 
-// declare module "wagmi" {
-//   interface Register {
-//     config: ReturnType<typeof getConfig>;
-//   }
-// }
+declare module "wagmi" {
+  interface Register {
+    config: ReturnType<typeof getConfig>;
+  }
+}
