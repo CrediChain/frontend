@@ -6,13 +6,13 @@ import { base } from "wagmi/chains";
 import { type ReactNode, useState } from "react";
 import { type State, WagmiProvider } from "wagmi";
 
-import { config } from "./config";
+import { getConfig } from "./config";
 
 export function Providers(props: {
   children: ReactNode;
   initialState?: State;
 }) {
-  // const [config] = useState(() => getConfig());
+  const [config] = useState(() => getConfig());
   const [queryClient] = useState(() => new QueryClient());
 
   return (

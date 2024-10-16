@@ -1,9 +1,9 @@
 import React from "react";
-import IssueCredentials from "../../app/components/IssueCredentials";
+import IssueCredentials from "../../components/IssueCredentials";
 
 const IssueCredentialsPage: React.FC = () => {
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-8 space-y-3">
       <h1 className="text-3xl font-bold mb-4">
         Issue Credentials to Studentes
       </h1>

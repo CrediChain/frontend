@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect } from 'react';
-import { ArrowRight, Zap, Shield, Gift } from 'lucide-react';
-import { useAccount } from 'wagmi';
-import WorldIdAuth from '../app/components/WorldIdAuth';
+import React, { useState, useEffect } from "react";
+import { ArrowRight, Zap, Shield, Gift } from "lucide-react";
+import { useAccount } from "wagmi";
+import WorldIdAuth from "../app/components/WorldIdAuth";
 
 const Home = () => {
   const { address, isConnected } = useAccount();
@@ -11,20 +11,19 @@ const Home = () => {
   const [triggerVerification, setTriggerVerification] = useState(false);
   const [userType, setUserType] = useState<string | null>(null);
 
-
   const handleVerificationSuccess = () => {
     setIsVerified(true);
-    if (userType === 'student') {
-      window.location.href = '/student';
-    } else if (userType === 'institution') {
-      window.location.href = '/institution';
+    if (userType === "student") {
+      window.location.href = "/student";
+    } else if (userType === "institution") {
+      window.location.href = "/institution";
     }
   };
 
   const handleConnectAndVerify = (type: string) => {
     if (!isConnected) {
       // Trigger Coinbase OnchainKit connection
-      alert('Please connect your wallet first.');
+      alert("Please connect your wallet first.");
       return;
     }
     setUserType(type); // Store the clicked user type
@@ -46,18 +45,19 @@ const Home = () => {
             Verify Credentials and Unlock Exclusive Discounts with CrediChain
           </h1>
           <p className="text-3xl mb-8 animate-fadeIn">
-            Secure, blockchain-based credential verification for students and institutions.
+            Secure, blockchain-based credential verification for students and
+            institutions.
           </p>
           <div className="flex justify-center space-x-4 mt-8">
             <button
               className="btn btn-primary animate-slideIn"
-              onClick={() => handleConnectAndVerify('student')}
+              onClick={() => handleConnectAndVerify("student")}
             >
               I'm a Student
             </button>
             <button
               className="btn btn-secondary animate-slideIn"
-              onClick={() => handleConnectAndVerify('institution')}
+              onClick={() => handleConnectAndVerify("institution")}
             >
               I'm an Institution
             </button>
@@ -67,38 +67,49 @@ const Home = () => {
 
       {/* World ID Authentication Widget */}
       {triggerVerification && (
-        <WorldIdAuth onSuccess={handleVerificationSuccess} triggerVerification={triggerVerification} />
+        <WorldIdAuth
+          onSuccess={handleVerificationSuccess}
+          triggerVerification={triggerVerification}
+        />
       )}
 
       {/* How It Works Section */}
       <section className="how-it-works-section">
         <div className="container mx-auto px-4">
-          <h2 className="text-5xl font-bold text-center mb-16">How CrediChain Works</h2>
+          <h2 className="text-5xl font-bold text-center mb-16">
+            How CrediChain Works
+          </h2>
           <div className="grid md:grid-cols-3 gap-12">
             {[
               {
                 title: "Verify Credentials",
-                description: "Institutions create soulbound NFTs for student credentials.",
+                description:
+                  "Institutions create soulbound NFTs for student credentials.",
                 icon: Shield,
                 color: "text-primary",
                 bg: "bg-primary-100",
               },
               {
                 title: "Offer Discounts",
-                description: "Institutions create discount offers for verified students.",
+                description:
+                  "Institutions create discount offers for verified students.",
                 icon: Gift,
                 color: "text-secondary",
                 bg: "bg-secondary-100",
               },
               {
                 title: "Claim Discounts",
-                description: "Students apply for and receive exclusive discounts.",
+                description:
+                  "Students apply for and receive exclusive discounts.",
                 icon: Zap,
                 color: "text-accent",
                 bg: "bg-accent-100",
               },
             ].map((step, i) => (
-              <div key={i} className="card animate-fadeIn hover:scale-105 transition-transform duration-300">
+              <div
+                key={i}
+                className="card animate-fadeIn hover:scale-105 transition-transform duration-300"
+              >
                 <div
                   className={`rounded-full w-24 h-24 flex items-center justify-center mx-auto mb-6 ${step.bg}`}
                 >
@@ -115,13 +126,14 @@ const Home = () => {
       {/* CTA Section */}
       <section className="cta-section">
         <div className="container mx-auto px-4 text-center relative z-10">
-          <h2 className="text-5xl font-bold mb-8 animate-fadeIn">Ready to Get Started?</h2>
+          <h2 className="text-5xl font-bold mb-8 animate-fadeIn">
+            Ready to Get Started?
+          </h2>
           <p className="text-2xl mb-12 animate-fadeIn">
-            Join CrediChain today and start verifying credentials or claiming discounts.
+            Join CrediChain today and start verifying credentials or claiming
+            discounts.
           </p>
-          <button
-            className="btn btn-primary animate-slideIn inline-flex items-center"
-          >
+          <button className="btn btn-primary animate-slideIn inline-flex items-center">
             Sign Up Now <ArrowRight className="ml-4 w-6 h-6" />
           </button>
         </div>
