@@ -60,7 +60,7 @@ const WorldIdAuth: React.FC<WorldIdAuthProps> = ({
 
   return (
     <IDKitWidget
-      app_id="app_staging_9e74e697f8ab2acdd8192776b90c6902"
+      app_id="app_73a5465deb149862c404bc52730e8a66"
       action="verify-entity"
       signal="optional_signal"
       onSuccess={onSuccess}

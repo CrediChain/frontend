@@ -32,16 +32,16 @@ const IssueCredentials: React.FC = () => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
       <Card title="Institution Credentials">
-        <p>Issue a new credential</p>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            5
+        <p className="text-xl font-bold">Issue a new credential</p>
+        <form onSubmit={handleSubmit} className="space-y-4 w-full">
+          <div className="flex flex-row justify-between space-x-2 ">
             <label
               htmlFor="addressTo"
-              className="block text-sm font-medium text-gray-700"
+              className=" text-sm font-medium text-gray-700 flex justify-center items-center "
             >
-              Address to:
+              Addressto:
             </label>
+
             <input
               type="text"
               id="addressTo"
@@ -53,10 +53,10 @@ const IssueCredentials: React.FC = () => {
             />
           </div>
 
-          <div>
+          <div className="flex flex-row w-full  justify-between space-x-12">
             <label
               htmlFor="uri"
-              className="block text-sm font-medium text-gray-700"
+              className=" text-sm font-medium text-gray-700 flex justify-center items-center"
             >
               URI:
             </label>

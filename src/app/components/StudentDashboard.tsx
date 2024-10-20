@@ -1,23 +1,51 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Card from "./Card";
 import { useReadContract, useAccount } from "wagmi";
 import { credichain } from "../../../contract-data/Utility";
+import { School } from "lucide-react";
+
+interface NFT {
+  tokenId: bigint; // Assuming tokenId is of type bigint
+  ownerAddress: string;
+  tokenURI: string;
+}
 
 const StudentDashboard: React.FC = () => {
   const [tokenId, setTokenId] = useState("");
   const [issuer, setIssuer] = useState("");
   const { address } = useAccount();
-  const { data: NFTs }: any = useReadContract({
+
+  const { data: NFTs }: { data: NFT[] | undefined } = useReadContract({
     ...credichain,
     functionName: "getStudentCredentials",
     args: [address],
   });
+  const { data: issuerAdd }: any = useReadContract({
+    ...credichain,
+    functionName: "getCredentialIssuer",
+    args: [tokenId],
+  });
+
+  useEffect(() => {
+    if (NFTs && NFTs.length > 0) {
+      console.log(NFTs[0].tokenURI);
+    }
+  }, [NFTs]);
+
+  if (!NFTs || NFTs.length === 0) {
+    return <p>No credentials found for this student.</p>;
+  }
+
+  const handleIssuerCheck = (e: React.FormEvent) => {
+    e.preventDefault();
+    setIssuer(issuerAdd.toString());
+  };
 
   return (
-    <div className="space-y-3">
-      <h2>Check Credential Issuer</h2>
-      <form className="space-y-4">
+    <div className="space-y-8">
+      <form className="space-y-4" onSubmit={handleIssuerCheck}>
+        <h2 className="text-xl font-bold">Check Credential Issuer</h2>
         <div>
           <label
             htmlFor="tokenId"
@@ -44,22 +72,33 @@ const StudentDashboard: React.FC = () => {
       </form>
 
       {issuer && (
-        <div className="mt-4 p-4 bg-gray-100 rounded-md">
-          <p className="text-gray-800">Credential Issuer: {issuer}</p>
+        <div className="mt-4  bg-gray-100 rounded-md">
+          <p className="text-gray-800 ">
+            Credential Issuer: <p className="font-bold text-xl">{issuer}</p>
+          </p>
         </div>
       )}
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <Card title="My Credentials">
-          {/* List of student's credentials */}
-          <p>List of student's credentials</p>
-          <p>{NFTs?.tokenId}</p>
-          <p>{NFTs?.ownerAddress}</p>
-          <p>{NFTs?.tokenURI}</p>
-        </Card>
+        {NFTs.map((nft, index) => (
+          <Card key={index} title={`Credential #${index + 1}`}>
+            <School className="w-40 h-40 my-4" />
+            <p className="flex w-full justify-between">
+              <p> Token Id:</p>
+              <p className="font-bold text-lg">{nft.tokenId.toString()}</p>
+            </p>
+            <p className="flex w-full justify-between">
+              {" "}
+              Owner Address:
+              <p className="font-semibold ">{nft.ownerAddress}</p>
+            </p>
+            <p className="flex w-full justify-between">
+              Token URI:<p className="font-bold text-lg">{nft.tokenURI}</p>
+            </p>
+          </Card>
+        ))}
         <Card title="Applied Discounts">
-          {/* List of discounts student has applied for */}
-          <p>List of discounts student has applied for</p>
+          <p></p>
         </Card>
       </div>
     </div>
