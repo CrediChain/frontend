@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { ArrowRight, Zap, Shield, Gift } from "lucide-react";
 import { useAccount } from "wagmi";
+import { useRouter } from "next/navigation"; // Import useRouter for redirecting
 import WorldIdAuth from "../app/components/WorldIdAuth";
 
 const Home = () => {
@@ -11,18 +12,19 @@ const Home = () => {
   const [triggerVerification, setTriggerVerification] = useState(false);
   const [userType, setUserType] = useState<string | null>(null);
 
+  const router = useRouter(); // Initialize useRouter
+
   const handleVerificationSuccess = () => {
     setIsVerified(true);
     if (userType === "student") {
-      window.location.href = "/student";
+      router.push("/student"); // Redirect to /student after verification
     } else if (userType === "institution") {
-      window.location.href = "/institution";
+      router.push("/institution"); // Redirect to /institution after verification
     }
   };
 
   const handleConnectAndVerify = (type: string) => {
     if (!isConnected) {
-      // Trigger Coinbase OnchainKit connection
       alert("Please connect your wallet first.");
       return;
     }
@@ -38,7 +40,6 @@ const Home = () => {
 
   return (
     <div className="bg-background min-h-screen">
-      {/* Hero Section */}
       <section className="hero-section">
         <div className="container mx-auto px-4 text-center relative z-10">
           <h1 className="text-6xl font-extrabold mb-6 animate-fadeIn">
@@ -65,7 +66,6 @@ const Home = () => {
         </div>
       </section>
 
-      {/* World ID Authentication Widget */}
       {triggerVerification && (
         <WorldIdAuth
           onSuccess={handleVerificationSuccess}
@@ -73,7 +73,6 @@ const Home = () => {
         />
       )}
 
-      {/* How It Works Section */}
       <section className="how-it-works-section">
         <div className="container mx-auto px-4">
           <h2 className="text-5xl font-bold text-center mb-16">
@@ -123,7 +122,6 @@ const Home = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
       <section className="cta-section">
         <div className="container mx-auto px-4 text-center relative z-10">
           <h2 className="text-5xl font-bold mb-8 animate-fadeIn">
